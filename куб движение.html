@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Документ без названия</title>
+</head>
+<body id='body'>
+	<script type='text/javascript' src='key.js'></script>
+	<canvas id='canvas' width='1000' height='450' style='border: 1px solid'></canvas>
+	<script>
+	var canvas= document.getElementById('canvas');
+	var context= canvas.getContext('2d');
+	function DrawRect() {
+		context.fillStyle='black';
+		context.clearRect(0,0,1000,500);
+		context.fillRect(x,y,50,50);
+			
+	};
+	
+	
+	 var a=0;
+	 
+	 
+	var body=document.getElementById('body');
+	body.onkeyup= function(e) {
+		a=(e.keyCode == 32);
+	};
+	
+	
+	
+	
+	function engine() {
+		DrawRect();
+		if (isKeyDown('W'))
+			y-=3;
+		if (isKeyDown('S'))
+			y+=3;
+		if (isKeyDown('A'))
+			x-=3;
+		if (isKeyDown('D'))
+			x+=3;
+		if (a==1){
+			start(loop);
+			a=0
+		};
+		
+	
+	};
+	
+	
+	//ПУЛЯ
+	
+	var c=10;
+	var game;
+	function gamep() {
+		context.fillStyle='red';
+		context.fillRect(c,10,50,50);
+	};
+
+	var next = (function() {
+		return	requestAnimationFrame ||
+		webkitRequestAnimationFrame   ||
+		mozRequestAnimationFrame      ||
+		oRequestAnimationFrame        ||
+		msRequestAnimationFrame       ||
+		function (callback) {
+			setTimeout(callback,1000/60);
+		};
+	})();
+	
+	var start = function(callback) {
+		game=callback;
+		step();
+	};
+	
+	var step = function() {
+		game();
+		next(step);
+	};
+	
+	var loop = function() {
+		gamep();
+		c+=1
+	};
+	
+	
+	
+	
+	
+	
+
+	
+	
+	</script>
+	
+	
+	
+</body>
+</html>
